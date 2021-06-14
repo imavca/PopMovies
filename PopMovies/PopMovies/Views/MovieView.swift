@@ -39,9 +39,13 @@ struct MovieView: View {
                 Text(formatter.string(from: movie.releaseDate ?? Date()))
                     .font(.subheadline)
                     .foregroundColor(.primary)
-                Text(String(movie.popularity ?? 0.0))
-                    .foregroundColor(.gray)
-                    .font(.footnote)
+                HStack {
+                    Text("Popularity Score:")
+                    Text(String(format: "%.1f",
+                                (movie.popularity ?? 0.0) / 100))
+                }
+                .foregroundColor(.gray)
+                .font(.footnote)
             }
         }
     }
