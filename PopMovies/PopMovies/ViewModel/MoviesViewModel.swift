@@ -16,6 +16,7 @@ class MoviesViewModel: ObservableObject, ActionsViewModel {
     private let service: APIService
     private(set) var movies = [Movie]()
     private var cancellables = Set<AnyCancellable>()
+    private var currentPage = 1
     @Published private(set) var state: ResultState = .loading
     
     init(service: APIService) {
@@ -26,7 +27,7 @@ class MoviesViewModel: ObservableObject, ActionsViewModel {
         self.state = .loading
         
         let cancellable = service
-            .request(from: .popular, parameters: nil)
+            .request(from: .popular, parameters: ["page": "\(currentPage)"])
             .sink{ res in
                 switch res {
                 case .finished:
@@ -35,7 +36,7 @@ class MoviesViewModel: ObservableObject, ActionsViewModel {
                     self.state = .failed(error: error)
                 }
             } receiveValue: { response in
-                self.movies = response.results
+                self.movies += response.results
             }
         
         self.cancellables.insert(cancellable)
