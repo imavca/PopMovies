@@ -20,7 +20,10 @@ struct HomeView: View {
             case .success(let movies):
                 NavigationView {
                     List(movies) { item in
-                        MovieView(movie: item)
+                        NavigationLink(
+                            destination: MovieDetail(movie: item)) {
+                            MovieView(movie: item)
+                        }
                     }
                     .navigationTitle(Text("Popular Movies"))
                 }
