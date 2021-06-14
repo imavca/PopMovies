@@ -17,6 +17,8 @@ class MoviesViewModel: ObservableObject, ActionsViewModel {
     private(set) var movies = [Movie]()
     private var cancellables = Set<AnyCancellable>()
     private var currentPage = 1
+    private var totalPages = 1
+    
     @Published private(set) var state: ResultState = .loading
     
     init(service: APIService) {
@@ -24,6 +26,10 @@ class MoviesViewModel: ObservableObject, ActionsViewModel {
     }
     
     func getMovies() {
+        guard currentPage <= totalPages else {
+            return
+        }
+        
         self.state = .loading
         
         let cancellable = service
@@ -36,12 +42,22 @@ class MoviesViewModel: ObservableObject, ActionsViewModel {
                     self.state = .failed(error: error)
                 }
             } receiveValue: { response in
-                self.movies += response.results
+                self.totalPages = response.totalPages ?? 1
+                self.currentPage += 1
+                if let newMovies = response.results {
+                    self.movies.append(contentsOf: newMovies)
+                }
             }
         
         self.cancellables.insert(cancellable)
     }
     
+    func isLastMovie(_ movie: Movie) -> Bool {
+        if let last = self.movies.last {
+            return last.id == movie.id
+        }
+        return false
+    }
 }
 
 

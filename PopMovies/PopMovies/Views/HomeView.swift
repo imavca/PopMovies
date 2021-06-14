@@ -23,6 +23,9 @@ struct HomeView: View {
                         NavigationLink(
                             destination: MovieDetail(movie: item)) {
                             MovieView(movie: item)
+                                .onAppear {
+                                    itemOnAppear(item)
+                                }
                         }
                     }
                     .navigationTitle(Text("Popular Movies"))
@@ -30,6 +33,12 @@ struct HomeView: View {
             }
             
         }.onAppear(perform: viewModel.getMovies)
+    }
+    
+    private func itemOnAppear(_ movie: Movie) {
+        if viewModel.isLastMovie(movie) {
+            viewModel.getMovies()
+        }
     }
 }
 
