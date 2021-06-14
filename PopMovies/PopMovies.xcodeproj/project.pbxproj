@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,6 +13,7 @@
 		8572E63E2676B49F008706EB /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8572E63D2676B49F008706EB /* APIError.swift */; };
 		8572E6412676E5C3008706EB /* ResultState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8572E6402676E5C3008706EB /* ResultState.swift */; };
 		8572E6442676E755008706EB /* MoviesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8572E6432676E755008706EB /* MoviesViewModel.swift */; };
+		8572E6472676F22D008706EB /* URLImage in Frameworks */ = {isa = PBXBuildFile; productRef = 8572E6462676F22D008706EB /* URLImage */; };
 		85BCAC7426769BAA00DCBBA6 /* PopMoviesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BCAC7326769BAA00DCBBA6 /* PopMoviesApp.swift */; };
 		85BCAC7826769BAC00DCBBA6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85BCAC7726769BAC00DCBBA6 /* Assets.xcassets */; };
 		85BCAC7B26769BAC00DCBBA6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85BCAC7A26769BAC00DCBBA6 /* Preview Assets.xcassets */; };
@@ -39,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8572E6472676F22D008706EB /* URLImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,6 +145,9 @@
 			dependencies = (
 			);
 			name = PopMovies;
+			packageProductDependencies = (
+				8572E6462676F22D008706EB /* URLImage */,
+			);
 			productName = PopMovies;
 			productReference = 85BCAC7026769BAA00DCBBA6 /* PopMovies.app */;
 			productType = "com.apple.product-type.application";
@@ -170,6 +175,9 @@
 				Base,
 			);
 			mainGroup = 85BCAC6726769BAA00DCBBA6;
+			packageReferences = (
+				8572E6452676F22D008706EB /* XCRemoteSwiftPackageReference "url-image" */,
+			);
 			productRefGroup = 85BCAC7126769BAA00DCBBA6 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -392,6 +400,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8572E6452676F22D008706EB /* XCRemoteSwiftPackageReference "url-image" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dmytro-anokhin/url-image";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8572E6462676F22D008706EB /* URLImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8572E6452676F22D008706EB /* XCRemoteSwiftPackageReference "url-image" */;
+			productName = URLImage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 85BCAC6826769BAA00DCBBA6 /* Project object */;
 }
