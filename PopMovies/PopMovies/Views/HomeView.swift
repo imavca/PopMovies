@@ -8,15 +8,30 @@
 import SwiftUI
 
 struct HomeView: View {
+    @StateObject var viewModel = MoviesViewModel(service: MovieService())
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Group {
+            switch viewModel.state {
+            case .loading:
+                ProgressView()
+            case .failed(let error):
+                ErrorView(error: error, handler: viewModel.getMovies)
+            case .success(let movies):
+                NavigationView {
+                    List(movies) { item in
+                        MovieView(movie: item)
+                    }
+                    .navigationTitle(Text("Popular Movies"))
+                }
+            }
+            
+        }.onAppear(perform: viewModel.getMovies)
     }
 }
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        Group {
-            HomeView()
-        }
+        HomeView()
     }
 }

@@ -85,8 +85,13 @@ struct MovieService: APIService {
                 }
                 
                 if (200...299).contains(response.statusCode) {
+                    let formatter: DateFormatter = {
+                        let formatter = DateFormatter()
+                        formatter.dateFormat = "yyy-MM-dd"
+                        return formatter
+                    }()
                     let jsonDecoder = JSONDecoder()
-                    jsonDecoder.dateDecodingStrategy = .iso8601
+                    jsonDecoder.dateDecodingStrategy = .formatted(formatter)
                     
                     return Just(data)
                         .decode(type: PaginatedResponse.self, decoder: jsonDecoder)
